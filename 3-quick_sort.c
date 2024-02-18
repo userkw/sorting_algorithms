@@ -1,74 +1,74 @@
 #include "sort.h"
 /**
-*swap - the positions of two elements into an array
+*swap - the positions of two els
 *@array: array
-*@item1: array element
-*@item2: array element
+*@item1: array elt
+*@item2: array elt
 */
 void swap(int *array, ssize_t item1, ssize_t item2)
 {
-	int tmp;
+	int tp;
 
-	tmp = array[item1];
+	tp = array[item1];
 	array[item1] = array[item2];
-	array[item2] = tmp;
+	array[item2] = tp;
 }
 /**
- *lomuto_partition - lomuto partition sorting scheme implementation
- *@array: array
- *@first: first array element
- *@last: last array element
- *@size: size array
- *Return: return the position of the last element sorted
+ *lomuto_partition - lomuto
+ *@array: ary
+ *@first: first ay elt
+ *@last: last ary elt
+ *@size: size ary
+ *Return: return the position
  */
 int lomuto_partition(int *array, ssize_t first, ssize_t last, size_t size)
 {
-	int pivot = array[last];
-	ssize_t current = first, finder;
+	int pvt = array[last];
+	ssize_t ct = first, finder;
 
 	for (finder = first; finder < last; finder++)
 	{
-		if (array[finder] < pivot)
+		if (array[finder] < pvt)
 		{
-			if (array[current] != array[finder])
+			if (array[ct] != array[finder])
 			{
-				swap(array, current, finder);
+				swap(array, ct, finder);
 				print_array(array, size);
 			}
-			current++;
+			ct++;
 		}
 	}
-	if (array[current] != array[last])
+	if (array[ct] != array[last])
 	{
-		swap(array, current, last);
+		swap(array, ct, last);
 		print_array(array, size);
 	}
-	return (current);
+	return (ct);
 }
 /**
- *qs - qucksort algorithm implementation
+ *qs - qucksort
  *@array: array
- *@first: first array element
- *@last: last array element
- *@size: array size
+ *@first: first arry
+ *@last: last arry
+ *@size: size
  */
 void qs(int *array, ssize_t first, ssize_t last, int size)
 {
-	ssize_t position = 0;
+	ssize_t p = 0;
 
 
 	if (first < last)
 	{
-		position = lomuto_partition(array, first, last, size);
+		p = lomuto_partition(array, first, last, size);
 
-		qs(array, first, position - 1, size);
-		qs(array, position + 1, last, size);
+		qs(array, first, p - 1, size);
+		qs(array, p + 1, last, size);
 	}
 }
 /**
- *quick_sort - prepare the terrain to quicksort algorithm
+ *quick_sort - prepare
  *@array: array
- *@size: array size
+ *@size: array
  */
 void quick_sort(int *array, size_t size)
 {
